@@ -1,0 +1,36 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build opencv project",
+            "type": "shell",
+            "command": "mkdir -p build && cd build && cmake .. && make",
+            "options": {
+                "cwd": "${workspaceFolder}"  // Ключевое исправление!
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"]
+        },
+        {
+            "label": "build single file",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-std=c++11",
+                "-g",
+                "src/main.cpp",
+                "-o",
+                "main",
+                "$(pkg-config --cflags --libs opencv4)"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": "build",
+            "problemMatcher": ["$gcc"]
+        }
+    ]
+}
